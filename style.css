@@ -35,6 +35,17 @@ main {
 
 .left {
   width: 52rem;
+  font-size: 2rem;
+  padding: 2rem;
+}
+
+.left > ul {
+  list-style-type: none;
+  margin: 10px;
+}
+
+.middle {
+  width: 52rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -116,4 +127,12 @@ h1 {
 
 .label-score {
   margin-bottom: 2rem;
+}
+
+.red-text {
+  color: red;
+}
+
+.guess-history > li {
+  margin: 1rem;
 }
