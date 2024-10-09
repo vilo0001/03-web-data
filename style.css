@@ -78,6 +78,9 @@ h1 {
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 50%);
+  /* Number is not highlightable and has a pointer cursor when hovered. */
+  user-select: none;
+  cursor: pointer;
 }
 
 .between {
@@ -135,4 +138,14 @@ h1 {
 
 .guess-history > li {
   margin: 1rem;
+}
+
+@keyframes redflash {
+  to {
+    background-color: #801a00;
+  }
+}
+
+.red {
+  animation: redflash 0.06s 2 alternate ease-out;
 }
