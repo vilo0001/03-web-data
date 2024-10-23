@@ -19,8 +19,12 @@ checkButton.addEventListener("click", () => {
 function checkInput() {
     const guessSelector = document.querySelector(".guess");
     const userInput = guessSelector.value;
+
+    const isInteger = Number.isInteger(Number(userInput));
+    const isOutOfRange = (Number(userInput) < 1 || Number(userInput) > 20);
+
     // User input is not an integer OR between 1 and 20.
-    if (!Number.isInteger(Number(userInput)) || (Number(userInput > 20)) || (Number(userInput < 1))) {
+    if (!isInteger || isOutOfRange) {
         alert("Please input integer between 1-20.");
     }
     // User input is an integer between 1 and 20.
@@ -82,26 +86,24 @@ function setNewRandomNumber() {
     if(cheatMode) questionMark.textContent = randomNumber;
 }
 
-function addToGuesses (number) {
-    // Add number to front.
-    lastFiveGuesses.unshift(number);
-    // If there are more than 5 guesses in the array, remove the last number.
-    if(lastFiveGuesses.length > 5) {
-        lastFiveGuesses.pop();
-    }
-
+function updateGuessHistoryUI() {
     for(let i=0; i<lastFiveGuesses.length; i++) {
         const currentHistoryGuess = document.querySelector(`.guess-history li:nth-child(${i+1})`);
         currentHistoryGuess.textContent = `${i+1} - ${lastFiveGuesses[i]}`;
     }
 }
 
-function resetGuessHistory () {
-    for(let i=0; i<lastFiveGuesses.length; i++) {
-        const currentHistoryGuess = document.querySelector(`.guess-history li:nth-child(${i+1})`);
-        currentHistoryGuess.textContent = `${i+1} - `;
+function addToGuesses(number) {
+    lastFiveGuesses.unshift(number);
+    if(lastFiveGuesses.length > 5) {
+        lastFiveGuesses.pop();
     }
+    updateGuessHistoryUI();
+}
+
+function resetGuessHistory() {
     lastFiveGuesses = [];
+    updateGuessHistoryUI();
 }
 
 // Add number to current score.
